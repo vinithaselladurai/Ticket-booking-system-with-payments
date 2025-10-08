@@ -1,0 +1,25 @@
+frontend/
+├─ public/
+│  └─ index.html
+├─ src/
+│  ├─ api/
+│  │  └─ api.js
+│  ├─ components/
+│  │  ├─ Navbar.js
+│  │  ├─ FlightCard.js
+│  │  ├─ HotelCard.js
+│  │  ├─ BookingCard.js
+│  │  └─ PaymentForm.js
+│  ├─ pages/
+│  │  ├─ Login.js
+│  │  ├─ Register.js
+│  │  ├─ Flights.js
+│  │  ├─ Hotels.js
+│  │  ├─ Dashboard.js
+│  │  ├─ Bookings.js
+│  │  └─ Profile.js
+│  ├─ App.js
+│  ├─ index.js
+│  └─ index.css
+├─ package.json
+└─ tailwind.config.js
