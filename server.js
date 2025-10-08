@@ -1,34 +1,31 @@
-require('dotenv').config();
 const express = require('express');
-const morgan = require('morgan');
+const mongoose = require('mongoose');
 const cors = require('cors');
-const connectDB = require('./config/db');
-const errorHandler = require('./middleware/errorHandler');
+require('dotenv').config();
 
-// routes
 const authRoutes = require('./routes/auth');
 const userRoutes = require('./routes/users');
-const dietRoutes = require('./routes/diet');
-const fitnessRoutes = require('./routes/fitness');
+const flightRoutes = require('./routes/flights');
+const hotelRoutes = require('./routes/hotels');
+const bookingRoutes = require('./routes/bookings');
+const paymentRoutes = require('./routes/payments');
 
 const app = express();
 app.use(cors());
 app.use(express.json());
-app.use(morgan('dev'));
 
+// Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
-app.use('/api/diet', dietRoutes);
-app.use('/api/fitness', fitnessRoutes);
+app.use('/api/flights', flightRoutes);
+app.use('/api/hotels', hotelRoutes);
+app.use('/api/bookings', bookingRoutes);
+app.use('/api/payments', paymentRoutes);
 
-// error handler (should be after routes)
-app.use(errorHandler);
-
-const PORT = process.env.PORT || 5000;
-
-connectDB().then(() => {
-  app.listen(PORT, () => console.log(Server started on port ${PORT}));
-}).catch(err => {
-  console.error('Failed to connect DB', err);
-  process.exit(1);
-});
+// Connect MongoDB
+mongoose.connect(process.env.MONGO_URI)
+  .then(() => {
+    console.log('MongoDB connected');
+    app.listen(process.env.PORT, () => console.log(Server running on port ${process.env.PORT}));
+  })
+  .catch(err => console.error(err));
