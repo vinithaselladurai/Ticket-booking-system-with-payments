@@ -1,0 +1,34 @@
+const mongoose = require('mongoose');
+require('dotenv').config();
+
+const Flight = require('./models/Flight');
+const Hotel = require('./models/Hotel');
+const User = require('./models/User');
+
+mongoose.connect(process.env.MONGO_URI)
+  .then(async () => {
+    console.log('MongoDB connected, seeding data...');
+
+    await Flight.deleteMany();
+    await Hotel.deleteMany();
+    await User.deleteMany();
+
+    // Seed Users
+    const user = await User.create({ name: 'DemoUser', email: 'demo@travel.com', passwordHash: 'demo123', preferences: {} });
+
+    // Seed Flights
+    await Flight.create([
+      { airline: 'AirAlpha', from: 'NY', to: 'LA', departureDate: new Date('2025-10-20T10:00'), arrivalDate: new Date('2025-10-20T14:00'), price: 300, seatsAvailable: 10 },
+      { airline: 'SkyJet', from: 'NY', to: 'LA', departureDate: new Date('2025-10-21T12:00'), arrivalDate: new Date('2025-10-21T16:00'), price: 320, seatsAvailable: 5 }
+    ]);
+
+    // Seed Hotels
+    await Hotel.create([
+      { name: 'Grand LA', location: 'LA', availableRooms: 5, pricePerNight: 150 },
+      { name: 'Budget Inn', location: 'LA', availableRooms: 10, pricePerNight: 80 }
+    ]);
+
+    console.log('Seeding complete!');
+    process.exit();
+  })
+  .catch(err => console.error(err));
