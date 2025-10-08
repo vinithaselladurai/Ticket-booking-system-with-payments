@@ -1,0 +1,27 @@
+backend/
+├─ controllers/
+│  ├─ authController.js
+│  ├─ userController.js
+│  ├─ flightController.js
+│  ├─ hotelController.js
+│  ├─ bookingController.js
+│  └─ paymentController.js
+├─ models/
+│  ├─ User.js
+│  ├─ Flight.js
+│  ├─ Hotel.js
+│  ├─ Booking.js
+│  └─ Payment.js
+├─ routes/
+│  ├─ auth.js
+│  ├─ users.js
+│  ├─ flights.js
+│  ├─ hotels.js
+│  ├─ bookings.js
+│  └─ payments.js
+├─ seedDemoData.js
+├─ middleware/
+│  └─ auth.js
+├─ server.js
+├─ package.json
+└─ .env.example
